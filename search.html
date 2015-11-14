@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <script src="//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
+       <script>
+           window.onload = function() {
+             document.getElementById("search").addEventListener(
+                             "click", function(){
+                // go out and get result from request.php
+                var word = document.getElementById("searching").value;
+               // var se = JSON.pasre(word);
+                if (word=="bar"){
+                 new Ajax.Request("request.php?q=bar",
+                       {
+                          method: "get",
+                          onSuccess: doSomethingWithTheResult
+                         });}
+                if(word=="definition"){
+                    new Ajax.Request("request.php?q=definition",
+                       {
+                          method: "get",
+                          onSuccess: doSomethingWithTheResult
+                         });
+                }
+                if(word=="ajax"){
+                   new Ajax.Request("request.php?q=ajax",
+                       {
+                          method: "get",
+                          onSuccess: doSomethingWithTheResult
+                         });  
+                }
+                  
+           });
+function doSomethingWithTheResult(data) {
+                          var result = document.getElementById("result");
+                         result.innerHTML += (data.responseText);
+                         console.log(data.responseText);
+                        }
+           };                        
+       </script>
+        <title>Ajax Demo of Seach Button</title>
+    </head>
+    <body>
+          <div id="result">
+              <form>
+          Term:<br>
+          <input type="text" name="firstname" id="searching">
+          <br>
+         
+        </form>
+            <button id="search">Search</button>
+          </div>
+    </body>
+</html>
